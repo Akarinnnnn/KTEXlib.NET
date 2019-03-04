@@ -6,11 +6,11 @@ using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
 using namespace System::Security::Permissions;
 
-[assembly:AssemblyTitleAttribute(L"ClassLibrary1")];
+[assembly:AssemblyTitleAttribute(L"KTEXLib_NET")];
 [assembly:AssemblyDescriptionAttribute(L"")];
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"")];
-[assembly:AssemblyProductAttribute(L"ClassLibrary1")];
+[assembly:AssemblyProductAttribute(L"KTEXLib_NET")];
 [assembly:AssemblyCopyrightAttribute(L"版权所有(c)  2019")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
