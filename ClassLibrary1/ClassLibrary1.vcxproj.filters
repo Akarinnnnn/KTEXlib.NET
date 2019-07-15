@@ -16,16 +16,25 @@
     <Filter Include="外部代码">
       <UniqueIdentifier>{65068371-c2d8-4bad-9a6f-24f574f7d32a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\ktexlib">
+      <UniqueIdentifier>{b60012f3-cf9a-44df-b8b6-c55acd56a815}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Ktex.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\KTEXAtlas.h">
+      <Filter>头文件\ktexlib</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\ktexcommon.h">
+      <Filter>头文件\ktexlib</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件\ktexlib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -48,13 +57,5 @@
     <Image Include="app.ico">
       <Filter>资源文件</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Lib\Debug_x64\ktexlib_dymanic.dll">
-      <Filter>外部代码</Filter>
-    </None>
-    <None Include="Lib\Release_x64\ktexlib_dymanic.dll">
-      <Filter>外部代码</Filter>
-    </None>
   </ItemGroup>
 </Project>
