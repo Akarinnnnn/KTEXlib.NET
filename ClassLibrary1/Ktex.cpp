@@ -143,13 +143,13 @@ ktexlib::NET::Ktex::Ktex(String^ KTEXPath)
 	}
 }
 
-void ktexlib::NET::Ktex::Append(BitmapImage ^ Image)
+void ktexlib::NET::Ktex::Append(BitmapSource ^ Image)
 {
 	auto tgt = wpf2rgba(Image);
 	native->PushRGBA(tgt);
 }
 
-void ktexlib::NET::Ktex::AddAt(BitmapImage^ Image, System::UInt16 pitch)
+void ktexlib::NET::Ktex::AddAt(BitmapSource ^ Image, System::UInt16 pitch)
 {
 	auto tgt = wpf2rgba(Image);
 	native->PushRGBA(tgt, pitch);
@@ -259,6 +259,24 @@ Object^ ktexlib::NET::Ktex::KtexEnumerator::cur_nongeneric::get()
 	return Current;
 }
 
+ktexlib::NET::KtexInfo::KtexInfo()
+{
+	PixelFormat = PixelFromat::DXT5;
+	PlatForm = Platform::opengl;
+	TextureType = TextureType::d2;
+	MipMapCount = 1;
+	Flags = 0;
+}
+
+ktexlib::NET::KtexInfo::KtexInfo(int pixfmt, int platfrm, int _textyp, unsigned short mips, unsigned char f)
+{
+	PixelFormat = PixelFromat(pixfmt);
+	PlatForm = Platform(platfrm);
+	TextureType = ktexlib::NET::TextureType(_textyp);
+	MipMapCount = mips;
+	Flags = f;
+}
+
 System::String^ ktexlib::NET::KtexInfo::ToString()
 {
 	return String::Format(
@@ -266,7 +284,7 @@ System::String^ ktexlib::NET::KtexInfo::ToString()
 		L"Pixel Format:{1}\n" +
 		L"Platform:{2}\n" +
 		L"Texture Type:{3}\n" +
-		L"Flags:{4}", MipMapCount, PixelFormat, PlatForm, TextureType, Convert::ToString(this->Flags, 2));
+		L"Flags:{4}", MipMapCount, PixelFormat, PlatForm, TextureType, Convert::ToString(Flags, 2));
 }
 
 String^ Ktex::OutPut::get()
@@ -278,17 +296,13 @@ void Ktex::OutPut::set(String^ path)
 {
 	auto opt = ms2wcs(path);
 	native->output = opt;
-	delete opt;
+	delete[] opt;
 }
 
 KtexInfo^ Ktex::Info::get()
 {
-	auto ret = gcnew KtexInfo();
-	ret->PixelFormat	= PixelFromat(native->Info.pixelformat);
-	ret->PlatForm		= Platform(native->Info.platform);
-	ret->TextureType	= TextureType(native->Info.texturetype);
-	ret->Flags			= native->Info.flags;
-	ret->MipMapCount	= native->Info.mipscount;
+	const auto& n = native->Info;
+	auto ret = gcnew KtexInfo((int)n.pixelformat, (int)n.platform, (int)n.texturetype, n.mipscount, n.flags);
 	return ret;
 }
 void Ktex::Info::set(KtexInfo^ v)
